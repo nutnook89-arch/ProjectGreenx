@@ -7,7 +7,6 @@
     <title>วิเคราะห์ต้นทุนและจุดคุ้มทุนบูธรักษ์โลก 2x2m</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -105,28 +104,11 @@
             </div>
             
             <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800 flex items-center justify-center p-3 h-[400px] lg:h-[450px] relative">
-                <model-viewer 
-                    src="booth_prototype.glb" 
-                    ios-src="booth_prototype.usdz"
-                    alt="โมเดล 3 มิติ บูธกระดาษรังผึ้ง 2x2 เมตร"
-                    ar 
-                    ar-modes="webxr scene-viewer quick-look" 
-                    camera-controls 
-                    auto-rotate 
-                    rotation-per-second="30deg"
-                    shadow-intensity="1" 
-                    environment-image="neutral" 
-                    exposure="1"
-                    class="w-full h-full rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-950 cursor-grab">
-                    
-                    <button slot="ar-button" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur text-slate-900 text-xs font-bold px-5 py-2.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.5)] flex items-center gap-2 hover:bg-emerald-50 transition border border-white">
-                        <span>📱</span> ดูบูธในพื้นที่จริง (AR)
-                    </button>
-                </model-viewer>
-                
-                <div class="absolute top-6 right-6 bg-black/40 text-white/80 text-[10px] px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 pointer-events-none flex items-center gap-1.5">
-                    <span class="animate-pulse">👆</span> หมุนดูได้ 360°
-                </div>
+                <img 
+                    src="booth_prototype.png" 
+                    alt="ภาพต้นแบบบูธกระดาษรังผึ้ง 2x2 เมตร"
+                    class="w-full h-full object-contain rounded-2xl"
+                >
             </div>
         </section>
 
@@ -323,17 +305,17 @@
                                     <td class="p-3 font-mono text-emerald-400 font-bold">W-01</td>
                                     <td class="p-3">ผนังหลัง A</td><td class="p-3 text-center">1</td>
                                     <td class="p-3"><span class="bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded-full text-[10px]">In Stock</span></td>
-                                </tr>
+                                }
                                 <tr class="border-t border-slate-800">
                                     <td class="p-3 font-mono text-emerald-400 font-bold">C-01</td>
                                     <td class="p-3">เคาน์เตอร์ท็อป 25mm</td><td class="p-3 text-center">1</td>
                                     <td class="p-3"><span class="bg-rose-900 text-rose-300 px-2 py-0.5 rounded-full text-[10px]">Damaged/Repair</span></td>
-                                </tr>
+                                }
                                 <tr class="border-t border-slate-800">
                                     <td class="p-3 font-mono text-emerald-400 font-bold">S-01</td>
                                     <td class="p-3">ชั้นวางสินค้า</td><td class="p-3 text-center">6</td>
                                     <td class="p-3"><span class="bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded-full text-[10px]">In Stock</span></td>
-                                </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -453,4 +435,5 @@
         };
     </script>
 </body>
+
 </html>
