@@ -7,6 +7,25 @@
     <title>วิเคราะห์ต้นทุนและจุดคุ้มทุนบูธรักษ์โลก 2x2m</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        // ระบบเปิด-ปิดเมนูบนมือถือ
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            // เวลากดปุ่ม 3 ขีด ให้สลับการซ่อน/แสดงเมนู
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            
+            // เวลาผู้ใช้กดเลือกลิงก์ใดๆ ให้ปิดหน้าต่างเมนูอัตโนมัติ
+            const mobileLinks = menu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -26,7 +45,7 @@
 
 <body class="pb-20">
 
-    <nav class="bg-slate-950/95 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800">
+  <nav class="bg-slate-950/95 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center font-black text-sm shadow-lg">♻️</div>
@@ -46,6 +65,17 @@
                     <span>📋</span> CNC Blueprint
                 </a>
             </div>
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-4 py-3 space-y-2 shadow-2xl">
+            <a href="#visual" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">สัดส่วน</a>
+            <a href="#cnc-modular" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">โครงสร้าง CNC</a>
+            <a href="#cost" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">ต้นทุน</a>
+            <a href="#breakeven" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">จุดคุ้มทุน</a>
+            <a href="#references" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">อ้างอิง</a>
+            <a href="detailed-cnc-blueprint.html" class="block bg-emerald-600 text-white text-sm font-bold py-3 px-3 rounded text-center mt-3">📋 ไปหน้า CNC Blueprint</a>
         </div>
     </nav>
 
