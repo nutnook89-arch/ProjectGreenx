@@ -7,25 +7,7 @@
     <title>วิเคราะห์ต้นทุนและจุดคุ้มทุนบูธรักษ์โลก 2x2m</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        // ระบบเปิด-ปิดเมนูบนมือถือ
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            
-            // เวลากดปุ่ม 3 ขีด ให้สลับการซ่อน/แสดงเมนู
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-            
-            // เวลาผู้ใช้กดเลือกลิงก์ใดๆ ให้ปิดหน้าต่างเมนูอัตโนมัติ
-            const mobileLinks = menu.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    menu.classList.add('hidden');
-                });
-            });
-        });
-    </script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -38,14 +20,12 @@
         .joint-slot { width: 80px; height: 120px; background: #d4b996; border: 2px solid #a88a64; position: relative; transition: all 0.5s ease; }
         .joint-slot::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 16px; height: 60px; background: #f8f9fa; border-bottom: 2px solid #a88a64; }
         .cardboard-texture { background-image: radial-gradient(#c4a484 1px, transparent 1px); background-size: 4px 4px; }
-        .ref-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .ref-card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,.1); }
     </style>
 </head>
 
 <body class="pb-20">
 
-  <nav class="bg-slate-950/95 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800">
+    <nav class="bg-slate-950/95 backdrop-blur-md text-white sticky top-0 z-50 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center font-black text-sm shadow-lg">♻️</div>
@@ -59,9 +39,8 @@
                 <a href="#cnc-modular" class="nav-link text-slate-300 hover:text-emerald-400 transition px-3 py-1.5 rounded-lg hover:bg-white/5">โครงสร้าง CNC</a>
                 <a href="#cost" class="nav-link text-slate-300 hover:text-emerald-400 transition px-3 py-1.5 rounded-lg hover:bg-white/5">ต้นทุน</a>
                 <a href="#breakeven" class="nav-link text-slate-300 hover:text-emerald-400 transition px-3 py-1.5 rounded-lg hover:bg-white/5">จุดคุ้มทุน</a>
-                <a href="#references" class="nav-link text-slate-300 hover:text-emerald-400 transition px-3 py-1.5 rounded-lg hover:bg-white/5">อ้างอิง</a>
                 <div class="w-px h-5 bg-slate-700 mx-1"></div>
-                <a href="detailed-cnc-blueprint.html" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 transition text-white px-3 py-1.5 rounded-lg text-[11px] font-bold">
+                <a href="detailed-cnc-blueprint.html" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 transition text-white px-3 py-1.5 rounded-lg text-[11px] font-bold shadow-md">
                     <span>📋</span> CNC Blueprint
                 </a>
             </div>
@@ -74,8 +53,7 @@
             <a href="#cnc-modular" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">โครงสร้าง CNC</a>
             <a href="#cost" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">ต้นทุน</a>
             <a href="#breakeven" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">จุดคุ้มทุน</a>
-            <a href="#references" class="block text-slate-300 hover:text-emerald-400 text-sm py-2 border-b border-slate-800">อ้างอิง</a>
-            <a href="detailed-cnc-blueprint.html" class="block bg-emerald-600 text-white text-sm font-bold py-3 px-3 rounded text-center mt-3">📋 ไปหน้า CNC Blueprint</a>
+            <a href="detailed-cnc-blueprint.html" class="block bg-emerald-600 text-white text-sm font-bold py-3 px-3 rounded-lg text-center mt-3 shadow-md">📋 ไปหน้า CNC Blueprint</a>
         </div>
     </nav>
 
@@ -84,7 +62,7 @@
         <div class="max-w-5xl mx-auto text-center relative z-10">
             <span class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6">
                 <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
-                Eco-Structure Intelligence Dashboard v4.0
+                Eco-Structure Intelligence Dashboard v4.5
             </span>
             <h1 class="text-4xl md:text-5xl font-extrabold text-white mt-2 mb-4 leading-tight">
                 บูธกระดาษรังผึ้ง <span class="text-emerald-400">2×2 เมตร</span>
@@ -125,8 +103,30 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800 flex items-center justify-center p-3">
-                <img src="booth_prototype.png" alt="ภาพต้นแบบบูธกระดาษรังผึ้ง" class="w-full h-auto object-contain rounded-2xl">
+            
+            <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800 flex items-center justify-center p-3 h-[400px] lg:h-[450px] relative">
+                <model-viewer 
+                    src="booth_prototype.glb" 
+                    ios-src="booth_prototype.usdz"
+                    alt="โมเดล 3 มิติ บูธกระดาษรังผึ้ง 2x2 เมตร"
+                    ar 
+                    ar-modes="webxr scene-viewer quick-look" 
+                    camera-controls 
+                    auto-rotate 
+                    rotation-per-second="30deg"
+                    shadow-intensity="1" 
+                    environment-image="neutral" 
+                    exposure="1"
+                    class="w-full h-full rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-950 cursor-grab">
+                    
+                    <button slot="ar-button" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur text-slate-900 text-xs font-bold px-5 py-2.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.5)] flex items-center gap-2 hover:bg-emerald-50 transition border border-white">
+                        <span>📱</span> ดูบูธในพื้นที่จริง (AR)
+                    </button>
+                </model-viewer>
+                
+                <div class="absolute top-6 right-6 bg-black/40 text-white/80 text-[10px] px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 pointer-events-none flex items-center gap-1.5">
+                    <span class="animate-pulse">👆</span> หมุนดูได้ 360°
+                </div>
             </div>
         </section>
 
@@ -150,36 +150,43 @@
             <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 mb-8">
                 <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
                     <span class="bg-sky-100 text-sky-700 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black">01</span>
-                    รายการชิ้นส่วนประกอบหลัก
+                    ผังพื้นและการประกอบ
                 </h3>
                 <div class="grid md:grid-cols-2 gap-8 items-start">
                     <div class="bg-slate-50 rounded-2xl border border-slate-200 p-4 flex items-center justify-center min-h-[300px]">
                         <img src="modular_2x2_top_view.png" alt="2x2m Booth Top View Floor Plan" class="max-w-full h-auto object-contain max-h-[400px]">
                     </div>
-                    <div class="space-y-2 text-sm">
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                            <h4 class="font-bold text-amber-900 text-sm mb-3">📐 ขนาดรวมโครงสร้าง</h4>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-white rounded-lg p-3 border border-amber-100 text-center">
+                                    <div class="text-xl font-black text-amber-700">2,000</div><div class="text-[10px] text-amber-500 uppercase font-bold mt-1">กว้าง (มม.)</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-amber-100 text-center">
+                                    <div class="text-xl font-black text-amber-700">2,000</div><div class="text-[10px] text-amber-500 uppercase font-bold mt-1">ลึก (มม.)</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-amber-100 text-center">
+                                    <div class="text-xl font-black text-amber-700">2,400</div><div class="text-[10px] text-amber-500 uppercase font-bold mt-1">สูง (มม.)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-slate-700 text-sm border-b pb-2">📋 รายการแผ่นผนัง (Panel Schedule)</h4>
                         <div class="flex items-center gap-3 bg-sky-50 p-3 rounded-xl border border-sky-100">
                             <span class="bg-sky-500 text-white text-[10px] font-black px-2 py-1 rounded font-mono">W-01</span>
-                            <span class="font-medium text-slate-700 flex-1">ผนังหลัง A (ซ้าย)</span>
-                            <span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">1000×2400×16mm</span>
+                            <span class="font-medium text-slate-700 flex-1">ผนังหลัง A (ซ้าย)</span><span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">1000×2400×16mm</span>
                         </div>
                         <div class="flex items-center gap-3 bg-sky-50 p-3 rounded-xl border border-sky-100">
                             <span class="bg-sky-500 text-white text-[10px] font-black px-2 py-1 rounded font-mono">W-02</span>
-                            <span class="font-medium text-slate-700 flex-1">ผนังหลัง B (ขวา)</span>
-                            <span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">1000×2400×16mm</span>
+                            <span class="font-medium text-slate-700 flex-1">ผนังหลัง B (ขวา)</span><span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">1000×2400×16mm</span>
                         </div>
                         <div class="flex items-center gap-3 bg-indigo-50 p-3 rounded-xl border border-indigo-100">
                             <span class="bg-indigo-500 text-white text-[10px] font-black px-2 py-1 rounded font-mono">W-03</span>
-                            <span class="font-medium text-slate-700 flex-1">ผนังด้านข้าง (ขวา)</span>
-                            <span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">1000×2400×16mm</span>
+                            <span class="font-medium text-slate-700 flex-1">ผนังด้านข้าง (ขวา)</span><span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">1000×2400×16mm</span>
                         </div>
                         <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
                             <span class="bg-slate-600 text-white text-[10px] font-black px-2 py-1 rounded font-mono">W-04</span>
-                            <span class="font-medium text-slate-700 flex-1">มุมเชื่อม L-Joint × 4 ชิ้น</span>
-                            <span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">150×2400×16mm</span>
-                        </div>
-                        <div class="mt-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
-                            <h4 class="font-bold text-amber-900 text-sm mb-2">สเปคร่องตัด CNC</h4>
-                            <p class="text-xs text-amber-800">หนา 16mm บากร่อง 15.5-15.8mm (Press-fit)<br>หนา 25mm บากร่องกว้างสุด 24.5mm (ห้ามตัดหลวม)</p>
+                            <span class="font-medium text-slate-700 flex-1">มุมเชื่อม L-Joint × 4 ชิ้น</span><span class="text-slate-500 font-mono text-xs bg-white px-2 py-1 rounded border">150×2400×16mm</span>
                         </div>
                     </div>
                 </div>
@@ -196,6 +203,12 @@
                 <div class="lg:col-span-1 bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col items-center">
                     <h4 class="font-bold text-slate-700 mb-6 uppercase text-xs tracking-widest">Cost Distribution</h4>
                     <div class="chart-container" style="height: 220px;"><canvas id="costPieChart"></canvas></div>
+                    <div class="mt-4 w-full space-y-2 text-xs">
+                        <div class="flex justify-between items-center"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span> วัสดุ</span><span class="font-bold">4,550 ฿</span></div>
+                        <div class="flex justify-between items-center"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-slate-800 inline-block"></span> ตัด CNC</span><span class="font-bold">2,500 ฿</span></div>
+                        <div class="flex justify-between items-center"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> พิมพ์ UV</span><span class="font-bold">3,000 ฿</span></div>
+                        <div class="flex justify-between items-center"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span> อื่นๆ</span><span class="font-bold">1,200 ฿</span></div>
+                    </div>
                 </div>
                 <div class="lg:col-span-2 bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
                     <table class="w-full text-sm">
@@ -207,12 +220,12 @@
                             </tr>
                         </thead>
                         <tbody class="text-slate-700">
-                            <tr class="border-b border-slate-50"><td class="py-4">รังผึ้ง 16mm</td><td class="py-4 text-center">6 แผ่น</td><td class="py-4 text-right font-bold">3,000</td></tr>
-                            <tr class="border-b border-slate-50"><td class="py-4">รังผึ้ง 25mm</td><td class="py-4 text-center">1 แผ่น</td><td class="py-4 text-right font-bold">700</td></tr>
-                            <tr class="border-b border-slate-50"><td class="py-4 bg-amber-50/50">Scrap / วัสดุกันพลาด</td><td class="py-4 text-center bg-amber-50/50">~12%</td><td class="py-4 text-right font-bold bg-amber-50/50">850</td></tr>
-                            <tr class="border-b border-slate-50"><td class="py-4">ตัด CNC</td><td class="py-4 text-center">21 ชิ้น</td><td class="py-4 text-right font-bold">2,500</td></tr>
-                            <tr class="border-b border-slate-50"><td class="py-4">พิมพ์ UV</td><td class="py-4 text-center">6 ตร.ม.</td><td class="py-4 text-right font-bold">3,000</td></tr>
-                            <tr><td class="py-4">เบ็ดเตล็ด</td><td class="py-4 text-center">-</td><td class="py-4 text-right font-bold">1,200</td></tr>
+                            <tr class="border-b border-slate-50"><td class="py-4 font-medium">รังผึ้ง 16mm (สีขาว)</td><td class="py-4 text-center text-slate-500">6 แผ่น</td><td class="py-4 text-right font-bold">3,000</td></tr>
+                            <tr class="border-b border-slate-50"><td class="py-4 font-medium">รังผึ้ง 25mm (เคาน์เตอร์)</td><td class="py-4 text-center text-slate-500">1 แผ่น</td><td class="py-4 text-right font-bold">700</td></tr>
+                            <tr class="border-b border-slate-50"><td class="py-4 font-medium bg-amber-50/50">Scrap / เผื่อตัดพลาด</td><td class="py-4 text-center text-slate-500 bg-amber-50/50">~12%</td><td class="py-4 text-right font-bold bg-amber-50/50">850</td></tr>
+                            <tr class="border-b border-slate-50"><td class="py-4 font-medium">ตัด Digital CNC</td><td class="py-4 text-center text-slate-500">21 ชิ้นส่วน</td><td class="py-4 text-right font-bold">2,500</td></tr>
+                            <tr class="border-b border-slate-50"><td class="py-4 font-medium">พิมพ์ UV Eco-Ink</td><td class="py-4 text-center text-slate-500">6 ตร.ม.</td><td class="py-4 text-right font-bold">3,000</td></tr>
+                            <tr><td class="py-4 font-medium">เบ็ดเตล็ด (เทป, แพ็คเกจ)</td><td class="py-4 text-center text-slate-500">ชุดรวม</td><td class="py-4 text-right font-bold">1,200</td></tr>
                         </tbody>
                         <tfoot class="border-t-2 border-slate-900 bg-slate-50">
                             <tr><td class="py-5 px-4 font-bold">รวมต้นทุนการลงทุนแรก</td><td></td><td class="py-5 px-4 text-right text-2xl font-black text-emerald-600">11,250.-</td></tr>
@@ -289,11 +302,11 @@
 
                 <div class="bg-slate-900/80 rounded-2xl p-6 border border-emerald-500/30 backdrop-blur-sm mt-8">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-bold text-emerald-300 flex items-center gap-2">📱 ระบบติดตามสต็อกชิ้นส่วน (Inventory Integration)</h3>
+                        <h3 class="text-lg font-bold text-emerald-300 flex items-center gap-2">📱 ระบบติดตามสต็อกชิ้นส่วน (Inventory)</h3>
                         <span class="bg-emerald-600/30 text-emerald-200 text-[10px] px-2 py-1 rounded border border-emerald-500/50">AppSheet Ready</span>
                     </div>
                     <p class="text-xs text-slate-300 mb-6 max-w-2xl leading-relaxed">
-                        ผมได้ออกแบบตารางโครงสร้างฐานข้อมูล (Data Schema) ด้านล่างนี้ ให้พร้อมสำหรับการนำไปผูกกับแอปพลิเคชันจัดการภายใน เพื่อให้ทีมงานสามารถใช้มือถือสแกน QR Code ตรวจนับชิ้นส่วนตอนประกอบและจัดเก็บได้อย่างแม่นยำ
+                        โครงสร้างฐานข้อมูล (Data Schema) ด้านล่างออกแบบมาให้พร้อมผูกกับ AppSheet สามารถใช้มือถือสแกน QR Code ตรวจนับชิ้นส่วนตอนประกอบและจัดเก็บได้อย่างแม่นยำ
                     </p>
                     <div class="overflow-x-auto bg-slate-950/50 rounded-xl border border-slate-700">
                         <table class="w-full text-left text-xs">
@@ -303,7 +316,6 @@
                                     <th class="p-3">ชื่อชิ้นส่วน</th>
                                     <th class="p-3 text-center">ต้องใช้ (ชิ้น)</th>
                                     <th class="p-3">สถานะ (Status)</th>
-                                    <th class="p-3 text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-slate-200">
@@ -311,19 +323,16 @@
                                     <td class="p-3 font-mono text-emerald-400 font-bold">W-01</td>
                                     <td class="p-3">ผนังหลัง A</td><td class="p-3 text-center">1</td>
                                     <td class="p-3"><span class="bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded-full text-[10px]">In Stock</span></td>
-                                    <td class="p-3 text-center"><button class="bg-white/10 hover:bg-emerald-600 transition px-3 py-1 rounded text-[10px]">Simulate Scan</button></td>
                                 </tr>
                                 <tr class="border-t border-slate-800">
                                     <td class="p-3 font-mono text-emerald-400 font-bold">C-01</td>
                                     <td class="p-3">เคาน์เตอร์ท็อป 25mm</td><td class="p-3 text-center">1</td>
                                     <td class="p-3"><span class="bg-rose-900 text-rose-300 px-2 py-0.5 rounded-full text-[10px]">Damaged/Repair</span></td>
-                                    <td class="p-3 text-center"><button class="bg-white/10 hover:bg-emerald-600 transition px-3 py-1 rounded text-[10px]">Simulate Scan</button></td>
                                 </tr>
                                 <tr class="border-t border-slate-800">
                                     <td class="p-3 font-mono text-emerald-400 font-bold">S-01</td>
                                     <td class="p-3">ชั้นวางสินค้า</td><td class="p-3 text-center">6</td>
                                     <td class="p-3"><span class="bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded-full text-[10px]">In Stock</span></td>
-                                    <td class="p-3 text-center"><button class="bg-white/10 hover:bg-emerald-600 transition px-3 py-1 rounded text-[10px]">Simulate Scan</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -336,48 +345,71 @@
     </main>
 
     <div class="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-3 bg-slate-950/90 backdrop-blur-md px-5 py-2.5 rounded-full shadow-2xl border border-slate-700 z-50">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[10px] font-bold text-slate-400 hover:text-emerald-400 transition uppercase tracking-widest">↑ กลับด้านบน</button>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-[10px] font-bold text-slate-400 hover:text-emerald-400 transition uppercase tracking-widest">↑ กลับบนสุด</button>
         <div class="w-px h-4 bg-slate-700"></div>
-        <button onclick="window.print()" class="text-[10px] font-bold text-slate-400 hover:text-emerald-400 transition uppercase tracking-widest flex items-center gap-1">🖨 พิมพ์รายงาน</button>
+        <button onclick="window.print()" class="text-[10px] font-bold text-slate-400 hover:text-emerald-400 transition uppercase tracking-widest flex items-center gap-1">🖨 พิมพ์</button>
         <div class="w-px h-4 bg-slate-700"></div>
-        <a href="detailed-cnc-blueprint.html" class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 transition uppercase tracking-widest flex items-center gap-1">📋 CNC Blueprint</a>
+        <a href="detailed-cnc-blueprint.html" class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 transition uppercase tracking-widest flex items-center gap-1">📋 ไป Blueprint</a>
     </div>
 
     <script>
+        // 1. ระบบเปิด-ปิดเมนูบนมือถือ
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            if(btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+                const mobileLinks = menu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.add('hidden');
+                    });
+                });
+            }
+        });
+
+        // 2. กราฟและการคำนวณ
         let beChart; // Global chart instance
         
         document.addEventListener('DOMContentLoaded', function () {
-            // 1. Cost Pie Chart
-            const ctxCost = document.getElementById('costPieChart').getContext('2d');
-            new Chart(ctxCost, {
-                type: 'doughnut',
-                data: {
-                    labels: ['วัสดุ', 'ตัด CNC', 'พิมพ์ UV', 'อื่นๆ'],
-                    datasets: [{ data: [4550, 2500, 3000, 1200], backgroundColor: ['#D4B996', '#064E3B', '#10b981', '#334155'], borderWidth: 0 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { family: "'Prompt'", size: 10 } } } } }
-            });
+            // Cost Pie Chart
+            const ctxCost = document.getElementById('costPieChart');
+            if(ctxCost) {
+                new Chart(ctxCost.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['วัสดุ', 'ตัด CNC', 'พิมพ์ UV', 'อื่นๆ'],
+                        datasets: [{ data: [4550, 2500, 3000, 1200], backgroundColor: ['#D4B996', '#064E3B', '#10b981', '#334155'], borderWidth: 0 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { family: "'Prompt'", size: 10 } } } } }
+                });
+            }
 
-            // 2. Init Break-even Chart
-            const ctxBE = document.getElementById('breakEvenChart').getContext('2d');
-            beChart = new Chart(ctxBE, {
-                type: 'line',
-                data: {
-                    labels: ['ครั้งที่ 1', 'ครั้งที่ 2', 'ครั้งที่ 3', 'ครั้งที่ 4', 'ครั้งที่ 5'],
-                    datasets: [
-                        { label: 'เช่าบูธไม้', data: [8500, 17000, 25500, 34000, 42500], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.05)', fill: true, tension: 0.3, borderWidth: 2 },
-                        { label: 'ซื้อบูธกระดาษ', data: [11250, 12250, 13250, 14250, 15250], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.05)', fill: true, tension: 0.3, borderWidth: 4 }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
-                    plugins: { legend: { display: false }, tooltip: { titleFont: { family: "'Prompt'" }, bodyFont: { family: "'Prompt'" }, padding: 12 } },
-                    scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { family: "'Prompt'", size: 10 } } }, x: { grid: { display: false }, ticks: { font: { family: "'Prompt'", size: 10 } } } }
-                }
-            });
+            // Init Break-even Chart
+            const ctxBE = document.getElementById('breakEvenChart');
+            if(ctxBE) {
+                beChart = new Chart(ctxBE.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['ครั้งที่ 1', 'ครั้งที่ 2', 'ครั้งที่ 3', 'ครั้งที่ 4', 'ครั้งที่ 5'],
+                        datasets: [
+                            { label: 'เช่าบูธไม้', data: [8500, 17000, 25500, 34000, 42500], borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.05)', fill: true, tension: 0.3, borderWidth: 2 },
+                            { label: 'ซื้อบูธกระดาษ', data: [11250, 12250, 13250, 14250, 15250], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.05)', fill: true, tension: 0.3, borderWidth: 4 }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+                        plugins: { legend: { display: false }, tooltip: { titleFont: { family: "'Prompt'" }, bodyFont: { family: "'Prompt'" }, padding: 12 } },
+                        scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { family: "'Prompt'", size: 10 } } }, x: { grid: { display: false }, ticks: { font: { family: "'Prompt'", size: 10 } } } }
+                    }
+                });
+            }
         });
 
-        // 3. Dynamic Calculation Function
+        // 3. ฟังก์ชันคำนวณจุดคุ้มทุน (Dynamic ROI Calculation)
         window.calculateROI = function() {
             const rental = parseFloat(document.getElementById('rentalCost').value) || 8500;
             const capex = parseFloat(document.getElementById('capexCost').value) || 11250;
@@ -388,9 +420,11 @@
             const capexData = Array.from({length: 5}, (_, i) => capex + (maintenance * i));
             
             // Update Chart
-            beChart.data.datasets[0].data = rentalData;
-            beChart.data.datasets[1].data = capexData;
-            beChart.update();
+            if(beChart) {
+                beChart.data.datasets[0].data = rentalData;
+                beChart.data.datasets[1].data = capexData;
+                beChart.update();
+            }
 
             // Calculate Payback Period
             let paybackTurn = 0;
@@ -414,10 +448,9 @@
                 document.getElementById('cardSaving').innerText = `~${savingPercent}%`;
             } else {
                 document.getElementById('savingText').innerText = `ต้นทุนสูงกว่าการเช่าที่ ${Math.abs(savingAmount).toLocaleString()}.-`;
-                document.getElementById('cardSaving').innerText = `No Saving`;
+                document.getElementById('cardSaving').innerText = `ไม่มีส่วนลด`;
             }
         };
     </script>
 </body>
-
 </html>
